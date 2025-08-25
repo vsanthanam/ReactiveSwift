@@ -5,22 +5,39 @@ import PackageDescription
 
 let package = Package(
     name: "ReactiveSwift",
+    platforms: [
+        .iOS(.v26),
+        .macOS(.v26),
+        .macCatalyst(.v26),
+        .watchOS(.v26),
+        .tvOS(.v26),
+        .visionOS(.v26),
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "ReactiveSwift",
-            targets: ["ReactiveSwift"]
+            targets: [
+                "ReactiveSwift"
+            ]
         ),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "ReactiveSwift"
+            name: "ReactiveSwift",
+            swiftSettings: [
+                .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+                .enableUpcomingFeature("InferIsolatedConformances"),
+                .enableUpcomingFeature("ExistentialAny")
+            ]
         ),
         .testTarget(
             name: "ReactiveSwiftTests",
-            dependencies: ["ReactiveSwift"]
+            dependencies: ["ReactiveSwift"],
+            swiftSettings: [
+                .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+                .enableUpcomingFeature("InferIsolatedConformances"),
+                .enableUpcomingFeature("ExistentialAny")
+            ]
         ),
     ]
 )
